@@ -1,2 +1,3 @@
 Testing GitHub webhook with Jenkins.
 This is my first automatic build.
+My second commit - Testing automatic Jenkins build.
