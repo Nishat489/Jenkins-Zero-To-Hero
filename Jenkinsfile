@@ -4,7 +4,7 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo 'Code checkout completed'
+                echo 'Code checkout completed - Donwloded code and saved in workspace'
             }
         }
 
