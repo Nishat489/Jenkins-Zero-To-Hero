@@ -1,6 +1,14 @@
 pipeline {
     agent any
 
+    parameters {
+        choice(
+            name: 'ENVIRONMENT',
+            choices: ['DEV', 'QA', 'PROD'],
+            description: 'Select deployment environment'
+        )
+    }
+
     stages {
         stage('Checkout') {
             steps {
@@ -31,6 +39,12 @@ pipeline {
                     sh 'echo "Credential loaded successfully"'
                     sh 'test -n "$MY_SECRET"'
                 }
+            }
+        }
+
+        stage('Deploy') {
+            steps {
+                echo "Deploying application to ${params.ENVIRONMENT}"
             }
         }
     }
