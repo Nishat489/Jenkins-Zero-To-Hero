@@ -42,8 +42,9 @@ pipeline {
             }
         }
 
-        stage('Deploy') {
+       stage('Deploy') {
             steps {
+                echo "Selected environment: ${params.ENVIRONMENT}"
                 echo "Deploying application to ${params.ENVIRONMENT}"
             }
         }
