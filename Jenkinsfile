@@ -4,13 +4,13 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                echo 'Code checkout completed - Donwloded code and saved in workspace'
+                echo 'Code checkout completed'
             }
         }
 
         stage('Build') {
             steps {
-                echo 'Compiling application...'
+                echo 'Building application...'
             }
         }
 
@@ -19,15 +19,19 @@ pipeline {
                 echo 'Running tests...'
             }
         }
-    }
 
-    post {
-        success {
-            echo 'Pipeline completed successfully!'
-        }
-
-        failure {
-            echo 'Pipeline failed!'
+        stage('Credentials Test') {
+            steps {
+                withCredentials([
+                    string(
+                        credentialsId: 'demo-secret',
+                        variable: 'MY_SECRET'
+                    )
+                ]) {
+                    sh 'echo "Credential loaded successfully"'
+                    sh 'test -n "$MY_SECRET"'
+                }
+            }
         }
     }
 }
